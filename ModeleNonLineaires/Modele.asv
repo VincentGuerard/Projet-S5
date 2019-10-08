@@ -33,17 +33,8 @@ as3 = 1;
 
 
 %% Dynamique de la plaque
-r_abc = 95.2/1000;
-XA = r_abc;
-YA = 0;
-XB = -r_abc*sind(30);
-YB = r_abc*cosd(30);
-XC = -r_abc*sind(30);
-YC = -r_abc*cosd(30);
-Jxy = 1347*10^-6;
-masseP = 442/1000
-
-
+r_abc = 95.2/
+XA = r_abc
 %% Dynamique de la sphère
 Rs = 3.9/1000;
 masseS = 8/1000;
