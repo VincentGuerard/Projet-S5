@@ -54,3 +54,4 @@ dkms.conf
 # MATLAB
 *.autosave
 *.asv
+slprj/
