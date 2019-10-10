@@ -55,15 +55,33 @@ masseS = 8/1000;
 g = 9.81;
 Js = 2*masseS*Rs^2/5;
 
+Ra = 1;
+Rb = 1;
+Rc = 1;
+La = 1;
+Lb = 1;
+Lc = 1;
+
 r_abc = 95.2/1000;
 XA = r_abc;
-YA = 0;
 XB = -r_abc*sind(30);
-YB = r_abc*cosd(30);
 XC = -r_abc*sind(30);
+XD = 1;
+XE = 1;
+XF = 1;
+YA = 0;
+YB = r_abc*cosd(30);
 YC = -r_abc*cosd(30);
+YD = 1;
+YE = 1;
+YF = 1;
 Jxy = 1347*10^-6;
+Jpx = Jxy;
+Jpy = Jxy;
+Jsx = 1;
+Jsy = 1;
 masseP = 442/1000
+m = masseP;
 
 be1 = 1;
 ae0 = 1;
@@ -79,7 +97,25 @@ L = 1;
 R = 1;
 V = 1;
 
+alpha_a = 1;
+alpha_b = 1;
+alpha_c = 1;
+beta_a = 1;
+beta_b = 1;
+beta_c = 1;
+gamma_a = 1;
+gamma_b = 1;
+gamma_c = 1;
+sigma_a = 1;
+sigma_b = 1;
+sigma_c = 1;
+
+A = double(subs(A))
+B = double(subs(B))
+C = double(subs(C))
+
 %% Simulation 
+u = [1; 1; 1];
 
 %% Affichage des résultats
 
