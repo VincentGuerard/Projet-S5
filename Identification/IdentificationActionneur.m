@@ -1,18 +1,15 @@
 %% Identification de la formule de l'actionneur
-clear all
-close all
-clc
+% clear all
+% close all
+% clc
 
-load("..\DonneesExperiemntales\Fe_attraction.mat")
-load("..\DonneesExperiemntales\Fs.mat")
+load("..\DonneesExperimentales\Fe_attraction.mat")
+load("..\DonneesExperimentales\Fs.mat")
 
 %% Identification de la fonction Fs avec la méthode de Gauss-Newton
 precision = 1e-3;
 xn = z_pos;
 yn = Fs;
-
-syms y b1 b2 x a1 a2 a3 a4
-f = y - -1 / (a1 + a2*x + a3*x^2 + a4*x^3);
 parametres = [0.1
               0.1;
               0.1;
@@ -34,6 +31,7 @@ for i = 0:1:50
         break
     end
 end
+parametresFs = parametres;
 
 gx = -1./(parametres(4).*xn.^3 + parametres(3).*xn.^2 + parametres(2).*xn + parametres(1));
 x = 0:0.0001:0.035;
@@ -60,9 +58,6 @@ be1 = 13.029359254409743;
 xn = z_m1A;
 yn = Fe_m1A;
 ik = -1;
-
-syms y x ae0 ae1 ae2 ae3 ae4
-residue = y - (((ik^2+be1*abs(ik))*sign(ik)) / (ae0 + ae1*x + ae2*x^2 + ae3*x^3));
 parametres = [0.1
               0.1;
               0.1;
@@ -108,9 +103,6 @@ fprintf('\n');
 xn = z_m2A;
 yn = Fe_m2A;
 ik = -2;
-
-syms y x ae0 ae1 ae2 ae3 ae4
-residue = y - (((ik^2+be1*abs(ik))*sign(ik)) / (ae0 + ae1*x + ae2*x^2 + ae3*x^3));
 parametres = [0.1
               0.1;
               0.1;
@@ -151,7 +143,15 @@ scatter(xn,yn);
 disp(['Pour la fonction Fe avec courant de 2A, la valeur de R^2 est de: ' num2str(R) ' et la valeur RMS est de: ' num2str(RMS)]);
 fprintf('\n');
 
-parametres1A
-parametres2A
+% Mapping vers les parametres du simulink
+as0 = parametresFs(1);
+as1 = parametresFs(2);
+as2 = parametresFs(3);
+as3 = parametresFs(4);
+
+ae0 = parametres1A(1);
+ae1 = parametres1A(2);
+ae2 = parametres1A(3);
+ae3 = parametres1A(4);
 
 
