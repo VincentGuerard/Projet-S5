@@ -23,6 +23,7 @@ tfin = 50;
 %initialisation
 bancEssaiConstantes
 %bancessai_ini  %faites tous vos calculs de modele ici
+run('../../Identification/IdentificationActionneur.m')
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
@@ -33,10 +34,10 @@ set_param('DYNctl_ver4_etud_obfusc','AlgebraicLoopSolver','LineSearch')
 sim('DYNctl_ver4_etud_obfusc')
 
 %% affichage
-titre = ["Ax";"Ay";"Pz";"Wx";"Wy";"Vz";"Px";"Py";"Vx";"Vy";"Ia";"Ib";"Ic";"zA";"zB";"zC";"zD";"zE";"zF";"Fa";"Fb";"Fc";"Va";"Vb";"Vc"];
-for i = 1:1:25
-    figure
-    plot(tsim, ynonlineaire(:,i));title(titre(i));
-end
+% titre = ["Ax";"Ay";"Pz";"Wx";"Wy";"Vz";"Px";"Py";"Vx";"Vy";"Ia";"Ib";"Ic";"zA";"zB";"zC";"zD";"zE";"zF";"Fa";"Fb";"Fc";"Va";"Vb";"Vc"];
+% for i = 1:1:25
+%     figure
+%     plot(tsim, ynonlineaire(:,i));title(titre(i));
+% end
 %trajectoires
 
