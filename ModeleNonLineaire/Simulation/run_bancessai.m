@@ -41,3 +41,37 @@ sim('DYNctl_ver4_etud_obfusc')
 % end
 %trajectoires
 
+% Comparaison des tension Va, Vb, Vc
+figure
+subplot(211)
+plot(tsim, ynonlineaire(:,23));hold on;
+plot(tsim, ynonlineaire(:,24));
+plot(tsim, ynonlineaire(:,25));
+plot(tsim, ySystemeNonLineaire(:,17));
+plot(tsim, ySystemeNonLineaire(:,18));
+plot(tsim, ySystemeNonLineaire(:,19));
+subplot(212)
+plot(tsim, ynonlineaire(:,23) - ySystemeNonLineaire(:,17)); hold on;
+plot(tsim, ynonlineaire(:,24) - ySystemeNonLineaire(:,18));
+plot(tsim, ynonlineaire(:,25) - ySystemeNonLineaire(:,19));
+
+% Comparaison des courants Ia, Ib, Ic
+figure
+subplot(211)
+plot(tsim, ynonlineaire(:,11));hold on;
+plot(tsim, ynonlineaire(:,12));
+plot(tsim, ynonlineaire(:,13));
+plot(tsim, ySystemeNonLineaire(:,7));
+plot(tsim, ySystemeNonLineaire(:,8));
+plot(tsim, ySystemeNonLineaire(:,9));
+subplot(212)
+plot(tsim, ynonlineaire(:,11) - ySystemeNonLineaire(:,7)); hold on;
+plot(tsim, ynonlineaire(:,12) - ySystemeNonLineaire(:,8));
+plot(tsim, ynonlineaire(:,13) - ySystemeNonLineaire(:,9));
+
+% Comparaison des Forces Fa, Fb, Fc
+
+% Comparaison des angles de la plaque phi et theta
+
+% Comparaison de la position de la bille sur la plaque Px et Py
+
