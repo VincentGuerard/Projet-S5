@@ -1,12 +1,12 @@
 %% Identification de la formule de l'actionneur
-% clear all
-% close all
-% clc
+clear all
+close all
+clc
 
 load("..\DonneesExperimentales\Fe_attraction.mat")
 load("..\DonneesExperimentales\Fs.mat")
 
-%% Identification de la fonction Fs avec la méthode de Gauss-Newton
+%% Identification de la fonction Fs avec la méthode des Moindres Carrées
 precision = 1e-3;
 xn = z_pos;
 yn = Fs;
@@ -50,7 +50,7 @@ scatter(xn,yn);
 disp(['Pour la fonction Fs, la valeur de R^2 est de: ' num2str(R) ' et la valeur RMS est de: ' num2str(RMS)]);
 fprintf('\n');
 
-%% Identification de la fonction Fe avec la méthode de Gauss-Newton
+%% Identification de la fonction Fe avec la méthode des Moindres Carrées
 precision = 1e-1;
 be1 = 13.029359254409743;
 
