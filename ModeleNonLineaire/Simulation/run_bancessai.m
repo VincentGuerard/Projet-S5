@@ -23,7 +23,8 @@ tfin = 50;
 %initialisation
 bancEssaiConstantes
 %bancessai_ini  %faites tous vos calculs de modele ici
-run('../../Identification/IdentificationActionneur.m')
+% run('../../Identification/IdentificationActionneur.m')
+run('../../Identification/Projet_s5.m')
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
