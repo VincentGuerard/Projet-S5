@@ -5,15 +5,18 @@
 % 23/10/2019 11:45 v1
 
 %%
-clear all
-close all
-clc
+% clear all
+% close all
+% clc
 
 %%
 %Création des variables
+be1 = 13.029359254409743;
 
-Fs = load('Fs')
-Fe = load('Fe_attraction')
+% Fs = load('Fs')
+% Fe = load('Fe_attraction')
+Fe = load("..\DonneesExperimentales\Fe_attraction.mat")
+Fs = load("..\DonneesExperimentales\Fs.mat")
 bE1 = 13.029359254409743;
 Offset = 0:0.1:15;
 I1 = -(ones(size(Fe.Fe_m1A)));
@@ -103,3 +106,15 @@ figure
 plot(Fs.z_pos,Fs.Fs)
 hold on 
 plot(Fs.z_pos,yappro)
+
+%% Mapping vers variables du simulink
+as0 = X3(1);
+as1 = X3(2);
+as2 = X3(3);
+as3 = X3(4);
+
+ae0 = X1(1);
+ae1 = X1(2);
+ae2 = X1(3);
+ae3 = X1(4);
+
