@@ -3,7 +3,7 @@ clear all
 clc
 
 % Position à l'équilibre de la sphère (pour tests statiques)
-sig = 1.0;         % Présence (1) ou non (0) de la sphère
+sig = 0.0;         % Présence (1) ou non (0) de la sphère
 xSeq = 0.000;      % Position x de la sphère à l'équilibre en metres
 ySeq = 0.000;      % Position y de la sphère à l'équilibre en metres
 
@@ -24,7 +24,7 @@ tfin = 50;
 bancEssaiConstantes
 %bancessai_ini  %faites tous vos calculs de modele ici
 % run('../../Identification/IdentificationActionneur.m')
-run('../../Identification/Projet_s5.m')
+run('../../Identification/Projet_s5.m');close all;
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
@@ -87,6 +87,13 @@ plot(tsim, ySystemeNonLineaire(:,16) - ynonlineaire(:,22));legend('Diff Fa', 'Di
 ylim([-5 5])
 
 % Comparaison des angles de la plaque phi et theta
+figure
+plot(tsim, ynonlineaire(:,1));hold on;title('Angle des deux modèles');
+plot(tsim, ynonlineaire(:,2));
+plot(tsim, ySystemeNonLineaire(:,9));
+plot(tsim, ySystemeNonLineaire(:,8));
+legend('Ax prof', 'Ay prof', 'Ax', 'Ay');grid on; grid minor;
+ylim([-0.05 0.05]);
 
 % Comparaison de la position de la bille sur la plaque Px et Py
 
