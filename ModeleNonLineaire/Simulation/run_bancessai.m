@@ -3,7 +3,7 @@ clear all
 clc
 
 % Position à l'équilibre de la sphère (pour tests statiques)
-sig = 0.0;         % Présence (1) ou non (0) de la sphère
+sig = 1.0;         % Présence (1) ou non (0) de la sphère
 xSeq = 0.000;      % Position x de la sphère à l'équilibre en metres
 ySeq = 0.000;      % Position y de la sphère à l'équilibre en metres
 
@@ -85,7 +85,6 @@ subplot(212);
 plot(tsim, ySystemeNonLineaire(:,14) - ynonlineaire(:,20)); hold on;title('Différence des forces Fa Fb Fc');
 plot(tsim, ySystemeNonLineaire(:,15) - ynonlineaire(:,21));
 plot(tsim, ySystemeNonLineaire(:,16) - ynonlineaire(:,22));legend('Diff Fa', 'Diff Fb', 'Diff Fc');grid on; grid minor;
-ylim([-5 5])
 
 % Comparaison des angles de la plaque phi et theta
 figure
