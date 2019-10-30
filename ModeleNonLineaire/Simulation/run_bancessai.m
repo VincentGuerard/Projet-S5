@@ -23,8 +23,9 @@ tfin = 50;
 %initialisation
 bancEssaiConstantes
 %bancessai_ini  %faites tous vos calculs de modele ici
-% run('../../Identification/IdentificationActionneur.m')
-run('../../Identification/Projet_s5.m');close all;
+run('../../Identification/IdentificationActionneur.m');close all;
+%run('../../Identification/Projet_s5.m');close all;
+bancEssaiConstantes
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
@@ -96,4 +97,22 @@ legend('Ax prof', 'Ay prof', 'Ax', 'Ay');grid on; grid minor;
 ylim([-0.05 0.05]);
 
 % Comparaison de la position de la bille sur la plaque Px et Py
-
+figure
+subplot(211); 
+plot(tsim, ynonlineaire(:,7));hold on;title('Position Px Py Vx Vy des deux modèles');
+plot(tsim, ynonlineaire(:,8));
+plot(tsim, ynonlineaire(:,9));
+plot(tsim, ynonlineaire(:,10));
+plot(tsim, ySystemeNonLineaire(:,2));
+plot(tsim, ySystemeNonLineaire(:,1));
+plot(tsim, ySystemeNonLineaire(:,4));
+plot(tsim, ySystemeNonLineaire(:,3));
+legend('Px prof', 'Py prof', 'Vx prof', 'Vy prof', 'Px', 'Py', 'Vx', 'Vy');grid on; grid minor;
+ylim([-0.06 0.06]);
+subplot(212); 
+plot(tsim, ySystemeNonLineaire(:,2) - ynonlineaire(:,7)); hold on;title('Différence de la position Px Py et la vitesse Vx Vy');
+plot(tsim, ySystemeNonLineaire(:,1) - ynonlineaire(:,8));
+plot(tsim, ySystemeNonLineaire(:,4) - ynonlineaire(:,9));
+plot(tsim, ySystemeNonLineaire(:,3) - ynonlineaire(:,10));
+legend('Diff Px', 'Diff Py', 'Diff Vx', 'Diff Vy');grid on; grid minor;
+ylim([-0.06 0.06])
