@@ -88,12 +88,15 @@ plot(tsim, ySystemeNonLineaire(:,16) - ynonlineaire(:,22));legend('Diff Fa', 'Di
 
 % Comparaison des angles de la plaque phi et theta
 figure
-plot(tsim, ynonlineaire(:,1));hold on;title('Angle des deux modèles');
-plot(tsim, ynonlineaire(:,2));
+plot(tsim, ynonlineaire(:,1), '--');hold on;title('Angle des deux modèles');
+plot(tsim, ynonlineaire(:,2), '--');
+plot(tsim, ynonlineaire(:,4), '--');
+plot(tsim, ynonlineaire(:,5), '--');
 plot(tsim, ySystemeNonLineaire(:,9));
 plot(tsim, ySystemeNonLineaire(:,8));
-legend('Ax prof', 'Ay prof', 'Ax', 'Ay');grid on; grid minor;
-ylim([-0.05 0.05]);
+plot(tsim, ySystemeNonLineaire(:,12));
+plot(tsim, ySystemeNonLineaire(:,13));
+legend('Ax prof', 'Ay prof', 'Wx prof', 'Wy prof', 'Ax', 'Ay', 'Wx', 'Wy');grid on; grid minor;
 
 % Comparaison de la position de la bille sur la plaque Px et Py
 figure
