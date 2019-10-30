@@ -1,7 +1,7 @@
 %% Identification de la formule de l'actionneur
-clear all
-close all
-clc
+% clear all
+% close all
+% clc
 
 load("..\DonneesExperimentales\Fe_attraction.mat")
 load("..\DonneesExperimentales\Fs.mat")
