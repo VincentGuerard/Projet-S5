@@ -9,13 +9,6 @@ masseS = 8/1000;
 g = 9.81;
 Js = 2*masseS*Rs^2/5;
 
-Ra = 1;
-Rb = 1;
-Rc = 1;
-La = 1;
-Lb = 1;
-Lc = 1;
-
 rabc = 95.2e-03;
 bE1 = 13.029359254409743;
 g = 9.81;
@@ -43,12 +36,13 @@ XC = -rabc*sind(30);
 YC = -rabc*cosd(30);
 ZC = 0;
 
-XD = 1;
-XE = 1;
-XF = 1;
-YD = 1;
-YE = 1;
-YF = 1;
+rdef = 80/1000;
+XD = rdef*sind(30);
+XE = -rdef;
+XF = rdef*sind(30);
+YD = rdef*cosd(30);
+YE = 0;
+YF = -rdef*cosd(30);
 
 aE0 = X1(1);
 aE1 = X1(2);
@@ -64,8 +58,6 @@ Jpx = 347e-06
 
 Jpy = 347e-06
 
-Jsx = 1;
-Jsy = 1;
 
 %%
 
@@ -89,15 +81,15 @@ syms iAeq iBeq iCeq zoeq xs ys
 %Equilibre des forces
 
 FCeq(xs,ys) = -m*g*((Xa*Yb + Xb*ys - xs*Yb - ys*Xa)/(Yb*Xa + Xb*Yc - Xc*Yb -Yc*Xa))
-FAeq(xs,ys) = FCeq*((Xb*Yc)/(Xa*Yb) - Xc/Xa) + m*g*((Xb*ys)/(Xa*Yb) - (xs*Yb)/(Xa*Yb))
-FBeq(xs,ys) = -( (Yc/Yb)*FCeq + m*g*(ys/Yb))
+FAeq(xs,ys) = FCeq(0,0)*((Xb*Yc)/(Xa*Yb) - Xc/Xa) + m*g*((Xb*ys)/(Xa*Yb) - (xs*Yb)/(Xa*Yb))
+FBeq(xs,ys) = -( (Yc/Yb)*FCeq(0,0) + m*g*(ys/Yb))
 
 %Equilibre des courants
 
-if FAeq(1,1) <0
-    fA(zoeq) = -iAeq^2 - bE1*iAeq - ( FAeq(1,1)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+if FAeq(0,0) <0
+    fA(zoeq) = -iAeq^2 + bE1*iAeq - ( FAeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
     
-    Soluce_iAeq = vpasolve(fA(1)==0,iAeq)
+    Soluce_iAeq = vpasolve(fA(0.015)==0,iAeq)
     if Soluce_iAeq(1) <0 && imag(Soluce_iAeq(1))==0
         Soluce_iAeqfin = Soluce_iAeq(1)
     else
@@ -106,10 +98,10 @@ if FAeq(1,1) <0
 
 end
 
-if FAeq(1,1) >0
-    fA(zoeq) = iAeq^2 + bE1*iAeq - ( FAeq(1,1)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+if FAeq(0,0) >0
+    fA(zoeq) = iAeq^2 + bE1*iAeq - ( FAeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
     
-    Soluce_iAeq = vpasolve(fA(1)==0,iAeq)
+    Soluce_iAeq = vpasolve(fA(0.015)==0,iAeq)
     if Soluce_iAeq(1) >0 && imag(Soluce_iAeq(1))==0
         Soluce_iAeqfin = Soluce_iAeq(1)
     else
@@ -118,10 +110,10 @@ if FAeq(1,1) >0
 
 end
 
-if FBeq(1,1) <0
-    fB(zoeq) = -iBeq^2 - bE1*iBeq - ( FBeq(1,1)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+if FBeq(0,0) <0
+    fB(zoeq) = -iBeq^2 + bE1*iBeq - ( FBeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
 
-    Soluce_iBeq = vpasolve(fB(1)==0,iBeq)
+    Soluce_iBeq = vpasolve(fB(0.015)==0,iBeq)
     if Soluce_iBeq(1) <0 && imag(Soluce_iBeq(1))==0
         Soluce_iBeqfin = Soluce_iBeq(1)
     else
@@ -130,10 +122,10 @@ if FBeq(1,1) <0
 
 end
 
-if FBeq(1,1) >0
-    fB(zoeq) = iBeq^2 + bE1*iBeq - ( FBeq(1,1)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+if FBeq(0,0) >0
+    fB(zoeq) = iBeq^2 + bE1*iBeq - ( FBeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
     
-    Soluce_iBeq = vpasolve(fB(1)==0,iBeq)
+    Soluce_iBeq = vpasolve(fB(0.015)==0,iBeq)
     if Soluce_iBeq(1) >0 && imag(Soluce_iBeq(1))==0
         Soluce_iBeqfin = Soluce_iBeq(1)
     else
@@ -142,10 +134,10 @@ if FBeq(1,1) >0
 
 end
 
-if FCeq(1,1) <0
-    fC(zoeq) = -iCeq^2 - bE1*iCeq - ( FCeq(1,1)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+if FCeq(0,0) <0
+    fC(zoeq) = -iCeq^2 + bE1*iCeq - ( FCeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
 
-    Soluce_iCeq = vpasolve(fC(1)==0,iCeq)
+    Soluce_iCeq = vpasolve(fC(0.015)==0,iCeq)
     if Soluce_iCeq(1) <0 && imag(Soluce_iCeq(1))==0
         Soluce_iCeqfin = Soluce_iCeq(1)
     else
@@ -154,10 +146,10 @@ if FCeq(1,1) <0
 
 end
 
-if FCeq(1,1) >0
-   fC(zoeq) = -iCeq^2 - bE1*iCeq - ( FCeq(1,1)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+if FCeq(0,0) >0
+   fC(zoeq) = iCeq^2 + bE1*iCeq - ( FCeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
 
-    Soluce_iCeq = vpasolve(fC(1)==0,iCeq)
+    Soluce_iCeq = vpasolve(fC(0.015)==0,iCeq)
     if Soluce_iCeq(1) >0 && imag(Soluce_iCeq(1))==0
         Soluce_iCeqfin = Soluce_iCeq(1)
     else
@@ -165,7 +157,6 @@ if FCeq(1,1) >0
     end
 
 end
-
 
 %%
 %Equilibre des tensions 
@@ -227,23 +218,23 @@ mat_Zero43 = zeros(4,3);
 mat_Zero73 = zeros(7,3);
 
 
-PP = [YB/Jpx*alphaB(0,0,Soluce_iBeqfin,1)+YC/Jpx*alphaC(0,0,Soluce_iCeqfin,1) YB/Jpx*betaB(0,0,Soluce_iBeqfin,1)+YC/Jpx*betaC(0,0,Soluce_iCeqfin,1) YB/Jpx*gammaB(0,0,Soluce_iBeqfin,1)+YC/Jpx*gammaC(0,0,Soluce_iCeqfin,1);
-      -XA/Jpy*alphaA(0,0,Soluce_iAeqfin,1)-XB/Jpy*alphaB(0,0,Soluce_iBeqfin,1)-XC/Jpy*alphaC(0,0,Soluce_iCeqfin,1) XA/Jpy*betaA(0,0,Soluce_iAeqfin,1)-XB/Jpy*betaB(0,0,Soluce_iBeqfin,1)-XC/Jpy*betaC(0,0,Soluce_iCeqfin,1) -XA/Jpy*gammaA(0,0,Soluce_iAeqfin,1)-XB/Jpy*gammaB(0,0,Soluce_iBeqfin,1)-XC/Jpy*gammaC(0,0,Soluce_iCeqfin,1);
-      alphaA(0,0,Soluce_iAeqfin,1)/m+alphaB(0,0,Soluce_iBeqfin,1)/m+alphaC(0,0,Soluce_iCeqfin,1)/m betaA(0,0,Soluce_iAeqfin,1)/m+betaB(0,0,Soluce_iBeqfin,1)/m+betaC(0,0,Soluce_iCeqfin,1)/m gammaA(0,0,Soluce_iAeqfin,1)/m+gammaB(0,0,Soluce_iBeqfin,1)/m+gammaC(0,0,Soluce_iCeqfin,1)/m];
-PS = [0 masseS*g/Jsx;
-      -masseS*g/Jsy 0;
+PP = [YB/Jpx*alphaB(0,0,Soluce_iBeqfin,0.015)+YC/Jpx*alphaC(0,0,Soluce_iCeqfin,0.015) YB/Jpx*betaB(0,0,Soluce_iBeqfin,0.015)+YC/Jpx*betaC(0,0,Soluce_iCeqfin,0.015) YB/Jpx*gammaB(0,0,Soluce_iBeqfin,0.015)+YC/Jpx*gammaC(0,0,Soluce_iCeqfin,0.015);
+      -XA/Jpy*alphaA(0,0,Soluce_iAeqfin,0.015)-XB/Jpy*alphaB(0,0,Soluce_iBeqfin,0.015)-XC/Jpy*alphaC(0,0,Soluce_iCeqfin,0.015) -XA/Jpy*betaA(0,0,Soluce_iAeqfin,0.015)-XB/Jpy*betaB(0,0,Soluce_iBeqfin,0.015)-XC/Jpy*betaC(0,0,Soluce_iCeqfin,0.015) -XA/Jpy*gammaA(0,0,Soluce_iAeqfin,0.015)-XB/Jpy*gammaB(0,0,Soluce_iBeqfin,0.015)-XC/Jpy*gammaC(0,0,Soluce_iCeqfin,0.015);
+      alphaA(0,0,Soluce_iAeqfin,0.015)/m+alphaB(0,0,Soluce_iBeqfin,0.015)/m+alphaC(0,0,Soluce_iCeqfin,0.015)/m betaA(0,0,Soluce_iAeqfin,0.015)/m+betaB(0,0,Soluce_iBeqfin,0.015)/m+betaC(0,0,Soluce_iCeqfin,0.015)/m gammaA(0,0,Soluce_iAeqfin,0.015)/m+gammaB(0,0,Soluce_iBeqfin,0.015)/m+gammaC(0,0,Soluce_iCeqfin,0.015)/m];
+PS = [0 masseS*g/Jpx;
+      -masseS*g/Jpy 0;
       0 0];
-PC = [0 YB/Jpx*sigmaB(0,0,Soluce_iBeqfin,1) YC/Jpx*sigmaC(0,0,Soluce_iCeqfin,1);
-      -XA/Jpx*sigmaA(0,0,Soluce_iAeqfin,1) -XB/Jpx*sigmaB(0,0,Soluce_iBeqfin,1) -XC/Jpx*sigmaC(0,0,Soluce_iCeqfin,1);
-      sigmaA(0,0,Soluce_iAeqfin,1)/m sigmaB(0,0,Soluce_iBeqfin,1)/m sigmaC(0,0,Soluce_iCeqfin,1)/m];
+PC = [0 YB/Jpx*sigmaB(0,0,Soluce_iBeqfin,0.015) YC/Jpx*sigmaC(0,0,Soluce_iCeqfin,0.015);
+      -XA/Jpx*sigmaA(0,0,Soluce_iAeqfin,0.015) -XB/Jpx*sigmaB(0,0,Soluce_iBeqfin,0.015) -XC/Jpx*sigmaC(0,0,Soluce_iCeqfin,0.015);
+      sigmaA(0,0,Soluce_iAeqfin,0.015)/m sigmaB(0,0,Soluce_iBeqfin,0.015)/m sigmaC(0,0,Soluce_iCeqfin,0.015)/m];
 SP = [0 -5/7*g 0;
       5/7*g 0 0];
-CC = [-Ra/La 0 0;
-      0 -Rb/Lb 0;
-      0 0 -Rc/Lc];
-CV = [1/La 0 0;
-      0 1/Lb 0;
-      0 0 1/Lc];
+CC = [-R/L 0 0;
+      0 -R/L 0;
+      0 0 -R/L];
+CV = [1/L 0 0;
+      0 1/L 0;
+      0 0 1/L];
 Tdef = [YD -XD 1;
         YE -XE 1;
         YF -XF 1];
@@ -259,11 +250,10 @@ C = [Tdef mat_Zero33 mat_Zero34 mat_Zero33;
      mat_Zero43 mat_Zero43 mat_One44 mat_Zero43];
 D = [mat_Zero73];
 
-
-
-
-
-
+A = double(A);
+B = double(B);
+C = double(C);
+D = double(D);
 
 
 
