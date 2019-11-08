@@ -43,37 +43,70 @@ plot(tsim, ynonlineaire(:,7), '--');hold on;title('Position Px Py Vx Vy nonlinéa
 plot(tsim, ynonlineaire(:,8), '--');
 plot(tsim, ynonlineaire(:,9), '--');
 plot(tsim, ynonlineaire(:,10), '--');
-plot(tsim, yLineaire.Data(:,4));
-plot(tsim, yLineaire.Data(:,5));
-plot(tsim, yLineaire.Data(:,6));
-plot(tsim, yLineaire.Data(:,7));
+plot(tsim, ySphereDecouple.Data(:,1));
+plot(tsim, ySphereDecouple.Data(:,2));
+plot(tsim, ySphereDecouple.Data(:,3));
+plot(tsim, ySphereDecouple.Data(:,4));
 legend('Px prof', 'Py prof', 'Vx prof', 'Vy prof', 'Px', 'Py', 'Vx', 'Vy');grid on; grid minor;
 ylim([-0.06 0.06]);
-subplot(212); 
-plot(tsim, yLineaire.Data(:,4) - ynonlineaire(:,7)); hold on;title('Différence de la position Px Py et la vitesse Vx Vy');
-plot(tsim, yLineaire.Data(:,5) - ynonlineaire(:,8));
-plot(tsim, yLineaire.Data(:,6) - ynonlineaire(:,9));
-plot(tsim, yLineaire.Data(:,7) - ynonlineaire(:,10));
+subplot(212);
+plot(tsim, ySphereDecouple.Data(:,1) - ynonlineaire(:,7)); hold on;title('Différence de la position Px Py et la vitesse Vx Vy');
+plot(tsim, ySphereDecouple.Data(:,2) - ynonlineaire(:,8));
+plot(tsim, ySphereDecouple.Data(:,3) - ynonlineaire(:,9));
+plot(tsim, ySphereDecouple.Data(:,4) - ynonlineaire(:,10));
 legend('Diff Px', 'Diff Py', 'Diff Vx', 'Diff Vy');grid on; grid minor;
-ylim([-0.02 0.02])
 
 % Comparaison des distances
 figure
-subplot(211); 
+subplot(211);
 hold on;title('Distance zD zE zF des deux modèles');
 plot(tsim, ynonlineaire(:,17), '--');
 plot(tsim, ynonlineaire(:,18), '--');
 plot(tsim, ynonlineaire(:,19), '--');
-plot(tsim, yLineaire.Data(:,1));
-plot(tsim, yLineaire.Data(:,2));
-plot(tsim, yLineaire.Data(:,3));
-ylim([0 0.03])
+plot(tsim, yPlaqueDecouple.Data(:,1));
+plot(tsim, yPlaqueDecouple.Data(:,2));
+plot(tsim, yPlaqueDecouple.Data(:,3));
 legend('zD prof', 'zE prof', 'zF prof', 'zD', 'zE', 'zF');grid on; grid minor;
 subplot(212); 
-hold on;title('Différence des distances zA zB zC zD zE zF');
-plot(tsim, yLineaire.Data(:,1) - ynonlineaire(:,17));
-plot(tsim, yLineaire.Data(:,2) - ynonlineaire(:,18));
-plot(tsim, yLineaire.Data(:,3) - ynonlineaire(:,19));
+hold on;title('Différence des distances zD zE zF');
+plot(tsim, yPlaqueDecouple.Data(:,1) - ynonlineaire(:,17));
+plot(tsim, yPlaqueDecouple.Data(:,2) - ynonlineaire(:,18));
+plot(tsim, yPlaqueDecouple.Data(:,3) - ynonlineaire(:,19));
 legend('Diff zD', 'Diff zE', 'Diff zF');grid on; grid minor;
-ylim([-0.02 0.02])
+
+% Comparaison des tenison
+figure
+subplot(211);
+hold on;title('Tension Va Vb Vc des deux modèles');
+plot(tsim, ynonlineaire(:,23), '--');
+plot(tsim, ynonlineaire(:,24), '--');
+plot(tsim, ynonlineaire(:,25), '--');
+plot(tsim, Tension.Data(:,1));
+plot(tsim, Tension.Data(:,2));
+plot(tsim, Tension.Data(:,3));
+legend('Va prof', 'Vb prof', 'Vc prof', 'Va', 'Vb', 'Vc');grid on; grid minor;
+subplot(212);
+hold on;title('Différence des distances Va Vb Vc');
+plot(tsim, Tension.Data(:,1) - ynonlineaire(:,23));
+plot(tsim, Tension.Data(:,2) - ynonlineaire(:,24));
+plot(tsim, Tension.Data(:,3) - ynonlineaire(:,25));
+legend('Diff Va', 'Diff Vb', 'Diff Vc');grid on; grid minor;
+
+% Comparaison des angles
+figure
+subplot(211);
+hold on;title('Angles et position des deux modèles');
+plot(tsim, ynonlineaire(:,1), '--');
+plot(tsim, ynonlineaire(:,2), '--');
+plot(tsim, ynonlineaire(:,3), '--');
+plot(tsim, Angles.Data(:,1));
+plot(tsim, Angles.Data(:,2));
+plot(tsim, Angles.Data(:,3));
+legend('Phi prof', 'Theta prof', 'z prof', 'Phi', 'Theta', 'z');grid on; grid minor;
+subplot(212); 
+hold on;title('Différence de Phi Theta z');
+plot(tsim, Angles.Data(:,1) - ynonlineaire(:,1));
+plot(tsim, Angles.Data(:,2) - ynonlineaire(:,2));
+plot(tsim, Angles.Data(:,3) - ynonlineaire(:,3));
+legend('Diff Phi', 'Diff Theta', 'Diff z');grid on; grid minor;
 

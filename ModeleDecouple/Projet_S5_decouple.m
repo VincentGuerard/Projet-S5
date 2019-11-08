@@ -217,15 +217,15 @@ mat_Zero34 = zeros(3,4);
 mat_Zero43 = zeros(4,3);
 mat_Zero73 = zeros(7,3);
 
-PP = [-2*XB*alphaB(0,0,Soluce_iBeqfin,0.015)/Jpx 0 0;
+PP = [2*XB*alphaB(0,0,Soluce_iBeqfin,0.015)/Jpx 0 0;
       0 -6*XB*betaB(0,0,Soluce_iBeqfin,0.015)/Jpy 0;
-      0 0 gammaC(0,0,Soluce_iCeqfin,0.015)/mP];
+      0 0 (gammaA(0,0,Soluce_iAeqfin,0.015)/(mP+mS))];
 PS = [0 0;
       0 0;
       0 0];
 PC = [sigmaA(0,0,Soluce_iAeqfin, 0.015)/Jpx 0 0;
       0 sigmaA(0,0,Soluce_iAeqfin, 0.015)/Jpy 0;
-      0 0 sigmaA(0,0,Soluce_iAeqfin, 0.015)/mP];
+      0 0 sigmaA(0,0,Soluce_iAeqfin, 0.015)/(mP+mS)];
 SP = [0 -5/7*g 0;
       5/7*g 0 0];
 CC = [-R/L 0 0;
@@ -237,11 +237,13 @@ CV = [1/L 0 0;
 Tdef = [YD -XD 1;
         YE -XE 1;
         YF -XF 1];
+Tabc = [YA YB YC;
+        -XA -XB -XC;
+        1 1 1];
 
 Aplaque = [mat_Zero33 mat_One33 mat_Zero33;
            PP mat_Zero33 PC;
            mat_Zero33 mat_Zero33 CC];
-
 Bplaque = [mat_Zero33; mat_Zero33; CV];
 Cplaque = [Tdef mat_Zero33 mat_Zero33];
 Dplaque = [mat_Zero33];

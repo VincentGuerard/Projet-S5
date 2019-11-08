@@ -37,6 +37,9 @@ CV = [1/La 0 0;
 Tdef = [YD -XD 1;
         YE -XE 1;
         YF -XF 1];
+Tabc = [YA YB YC;
+        -XA -XB -XC;
+        1 1 1];
 
 A = [mat_Zero33 mat_One33 mat_Zero32 mat_Zero32 mat_Zero33;
      PP mat_Zero33 PS mat_Zero32 PC;
