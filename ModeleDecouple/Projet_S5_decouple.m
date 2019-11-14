@@ -261,3 +261,13 @@ Csphere = mat_One44;
 Dsphere = mat_Zero43;
 
 invTDEF = inv(Tdef);
+
+%% Fonction de transfert du système découplé
+%Systèmes à variables d'état
+VEplaque = ss(Aplaque,Bplaque,Cplaque,Dplaque);
+VEsphere = ss(Asphere,Bsphere,Csphere,Dsphere);
+
+%Fonctions de transfert des systèmes
+FTplaque = tf(VEplaque)
+FTsphere = tf(VEsphere)
+
