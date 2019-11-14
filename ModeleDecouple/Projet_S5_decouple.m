@@ -268,6 +268,79 @@ VEplaque = ss(Aplaque,Bplaque,Cplaque,Dplaque);
 VEsphere = ss(Asphere,Bsphere,Csphere,Dsphere);
 
 %Fonctions de transfert des systèmes
-FTplaque = tf(VEplaque)
-FTsphere = tf(VEsphere)
+FTplaque = tf(VEplaque);
+FTsphere = tf(VEsphere);
+
+%Numérateur dénominateur des fonctions de transfert
+[nump11, denp11] = tfdata(FTplaque(1,1), 'v'); 
+[nump12, denp12] = tfdata(FTplaque(1,2), 'v');  %denumérateur plaque input 2 output 1 (denp12)
+[nump13, denp13] = tfdata(FTplaque(1,3), 'v');
+[nump21, denp21] = tfdata(FTplaque(2,1), 'v');
+[nump22, denp22] = tfdata(FTplaque(2,2), 'v');
+[nump23, denp23] = tfdata(FTplaque(2,3), 'v');
+[nump31, denp31] = tfdata(FTplaque(3,1), 'v');
+[nump32, denp32] = tfdata(FTplaque(3,2), 'v');
+[nump33, denp33] = tfdata(FTplaque(3,3), 'v');
+
+[nums11, dens11] = tfdata(FTsphere(1,1), 'v');
+[nums12, dens12] = tfdata(FTsphere(1,2), 'v');  %Dénominateur shpere input 2 et output 1 (dens12)
+[nums13, dens13] = tfdata(FTsphere(1,3), 'v');
+[nums21, dens21] = tfdata(FTsphere(2,1), 'v');
+[nums22, dens22] = tfdata(FTsphere(2,2), 'v');
+[nums23, dens23] = tfdata(FTsphere(2,3), 'v');
+[nums31, dens31] = tfdata(FTsphere(3,1), 'v');
+[nums32, dens32] = tfdata(FTsphere(3,2), 'v');
+[nums33, dens33] = tfdata(FTsphere(3,3), 'v');
+[nums41, dens41] = tfdata(FTsphere(4,1), 'v');
+[nums42, dens42] = tfdata(FTsphere(4,2), 'v');
+[nums43, dens43] = tfdata(FTsphere(4,3), 'v');
+
+%Pôles et zéros des fonctions de transfert
+pp11 = roots(denp11)
+pp12 = roots(denp12)    %pole plaque output 1 input 2
+pp13 = roots(denp13)
+pp21 = roots(denp21)
+pp22 = roots(denp22)
+pp23 = roots(denp23)
+pp31 = roots(denp31)
+pp32 = roots(denp32)
+pp33 = roots(denp33)
+
+ps11 = roots(dens11)
+ps12 = roots(dens12)
+ps13 = roots(dens13)
+ps21 = roots(dens21)
+ps22 = roots(dens22)
+ps23 = roots(dens23)
+ps31 = roots(dens31)
+ps32 = roots(dens32)
+ps33 = roots(dens33)
+ps41 = roots(dens41)
+ps42 = roots(dens42)
+ps43 = roots(dens43)
+
+
+%% Lieu des racines
+%Entrée Vphi
+figure
+subplot(211)
+rlocus(FTplaque(1,1))
+title('Lieu des racines FT pour entrée Vphi et sortie dD')
+subplot(212)
+rlocus(FTplaque(3,1))
+title('Lieu des racines FT pour entrée Vphi et sortie dF')
+
+%Entrée Vtetha
+figure
+subplot(211)
+rlocus(FTplaque(1,2))
+title('Lieu des racines FT pour entrée Vtheta et sortie dD et sortie dF')
+subplot(212)
+rlocus(FTplaque(2,2))
+title('Lieu des racines FT pour entrée Vtheta et sortie dE')
+
+%Entrée Vz
+figure
+rlocus(FTplaque(1,3))
+title('Lieu des racines FT pour entrée Vz et sortie dD, dE et dF')
 
