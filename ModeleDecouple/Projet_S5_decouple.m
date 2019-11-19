@@ -54,9 +54,9 @@ as1 = X3(2);
 as2 = X3(3);
 as3 = X3(4);
 
-Jpx = 347e-06
+Jpx = 347e-06;
 
-Jpy = 347e-06
+Jpy = 347e-06;
 
 
 %%
@@ -80,80 +80,80 @@ syms iAeq iBeq iCeq zoeq xs ys
 
 %Equilibre des forces
 
-FCeq(xs,ys) = -m*g*((Xa*Yb + Xb*ys - xs*Yb - ys*Xa)/(Yb*Xa + Xb*Yc - Xc*Yb -Yc*Xa))
-FAeq(xs,ys) = FCeq(0,0)*((Xb*Yc)/(Xa*Yb) - Xc/Xa) + m*g*((Xb*ys)/(Xa*Yb) - (xs*Yb)/(Xa*Yb))
-FBeq(xs,ys) = -( (Yc/Yb)*FCeq(0,0) + m*g*(ys/Yb))
+FCeq(xs,ys) = -m*g*((Xa*Yb + Xb*ys - xs*Yb - ys*Xa)/(Yb*Xa + Xb*Yc - Xc*Yb -Yc*Xa));
+FAeq(xs,ys) = FCeq(0,0)*((Xb*Yc)/(Xa*Yb) - Xc/Xa) + m*g*((Xb*ys)/(Xa*Yb) - (xs*Yb)/(Xa*Yb));
+FBeq(xs,ys) = -( (Yc/Yb)*FCeq(0,0) + m*g*(ys/Yb));
 
 %Equilibre des courants
 
 if FAeq(0,0) <0
-    fA(zoeq) = -iAeq^2 + bE1*iAeq - ( FAeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+    fA(zoeq) = -iAeq^2 + bE1*iAeq - ( FAeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3));
     
-    Soluce_iAeq = vpasolve(fA(0.015)==0,iAeq)
+    Soluce_iAeq = vpasolve(fA(0.015)==0,iAeq);
     if Soluce_iAeq(1) <0 && imag(Soluce_iAeq(1))==0
-        Soluce_iAeqfin = Soluce_iAeq(1)
+        Soluce_iAeqfin = Soluce_iAeq(1);
     else
-        Soluce_iAeqfin = Soluce_iAeq(2)
+        Soluce_iAeqfin = Soluce_iAeq(2);
     end
 
 end
 
 if FAeq(0,0) >0
-    fA(zoeq) = iAeq^2 + bE1*iAeq - ( FAeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+    fA(zoeq) = iAeq^2 + bE1*iAeq - ( FAeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3));
     
-    Soluce_iAeq = vpasolve(fA(0.015)==0,iAeq)
+    Soluce_iAeq = vpasolve(fA(0.015)==0,iAeq);
     if Soluce_iAeq(1) >0 && imag(Soluce_iAeq(1))==0
-        Soluce_iAeqfin = Soluce_iAeq(1)
+        Soluce_iAeqfin = Soluce_iAeq(1);
     else
-        Soluce_iAeqfin = Soluce_iAeq(2)
+        Soluce_iAeqfin = Soluce_iAeq(2);
     end
 
 end
 
 if FBeq(0,0) <0
-    fB(zoeq) = -iBeq^2 + bE1*iBeq - ( FBeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+    fB(zoeq) = -iBeq^2 + bE1*iBeq - ( FBeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3));
 
-    Soluce_iBeq = vpasolve(fB(0.015)==0,iBeq)
+    Soluce_iBeq = vpasolve(fB(0.015)==0,iBeq);
     if Soluce_iBeq(1) <0 && imag(Soluce_iBeq(1))==0
-        Soluce_iBeqfin = Soluce_iBeq(1)
+        Soluce_iBeqfin = Soluce_iBeq(1);
     else
-        Soluce_iBeqfin = Soluce_iBeq(2)
+        Soluce_iBeqfin = Soluce_iBeq(2);
     end
 
 end
 
 if FBeq(0,0) >0
-    fB(zoeq) = iBeq^2 + bE1*iBeq - ( FBeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+    fB(zoeq) = iBeq^2 + bE1*iBeq - ( FBeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3));
     
     Soluce_iBeq = vpasolve(fB(0.015)==0,iBeq)
     if Soluce_iBeq(1) >0 && imag(Soluce_iBeq(1))==0
-        Soluce_iBeqfin = Soluce_iBeq(1)
+        Soluce_iBeqfin = Soluce_iBeq(1);
     else
-        Soluce_iBeqfin = Soluce_iBeq(2)
+        Soluce_iBeqfin = Soluce_iBeq(2);
     end
 
 end
 
 if FCeq(0,0) <0
-    fC(zoeq) = -iCeq^2 + bE1*iCeq - ( FCeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+    fC(zoeq) = -iCeq^2 + bE1*iCeq - ( FCeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3));
 
-    Soluce_iCeq = vpasolve(fC(0.015)==0,iCeq)
+    Soluce_iCeq = vpasolve(fC(0.015)==0,iCeq);
     if Soluce_iCeq(1) <0 && imag(Soluce_iCeq(1))==0
-        Soluce_iCeqfin = Soluce_iCeq(1)
+        Soluce_iCeqfin = Soluce_iCeq(1);
     else
-        Soluce_iCeqfin = Soluce_iCeq(2)
+        Soluce_iCeqfin = Soluce_iCeq(2);
     end
 
 end
 
 if FCeq(0,0) >0
-   fC(zoeq) = iCeq^2 + bE1*iCeq - ( FCeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3))
+   fC(zoeq) = iCeq^2 + bE1*iCeq - ( FCeq(0,0)*(aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3) + (aE0 + aE1*zoeq + aE2*zoeq^2 + aE3*zoeq^3)/(as0 + as1*zoeq + as2*zoeq^2 + as3*zoeq^3));
 
-    Soluce_iCeq = vpasolve(fC(0.015)==0,iCeq)
+    Soluce_iCeq = vpasolve(fC(0.015)==0,iCeq);
     if Soluce_iCeq(1) >0 && imag(Soluce_iCeq(1))==0
-        Soluce_iCeqfin = Soluce_iCeq(1)
+        Soluce_iCeqfin = Soluce_iCeq(1);
     else
-        Soluce_iCeqfin = Soluce_iCeq(2)
+        Soluce_iCeqfin = Soluce_iCeq(2);
     end
 
 end
@@ -240,12 +240,13 @@ Tdef = [YD -XD 1;
 Tabc = [YA YB YC;
         -XA -XB -XC;
         1 1 1];
+invTDEF = inv(Tdef);
 
 Aplaque = [mat_Zero33 mat_One33 mat_Zero33;
            PP mat_Zero33 PC;
            mat_Zero33 mat_Zero33 CC];
 Bplaque = [mat_Zero33; mat_Zero33; CV];
-Cplaque = [Tdef mat_Zero33 mat_Zero33];
+Cplaque = [mat_One33 mat_Zero33 mat_Zero33];
 Dplaque = [mat_Zero33];
 
 Aplaque = double(Aplaque);
@@ -260,87 +261,57 @@ Bsphere = [mat_Zero23; SP];
 Csphere = mat_One44;
 Dsphere = mat_Zero43;
 
-invTDEF = inv(Tdef);
-
 %% Fonction de transfert du système découplé
 %Systèmes à variables d'état
 VEplaque = ss(Aplaque,Bplaque,Cplaque,Dplaque);
 VEsphere = ss(Asphere,Bsphere,Csphere,Dsphere);
 
 %Fonctions de transfert des systèmes
+%In1 = V_phi In2 = V_theta In3 = V_z
 FTplaque = tf(VEplaque);
 FTsphere = tf(VEsphere);
 
-%Numérateur dénominateur des fonctions de transfert
-[nump11, denp11] = tfdata(FTplaque(1,1), 'v'); 
-[nump12, denp12] = tfdata(FTplaque(1,2), 'v');  %denumérateur plaque input 2 output 1 (denp12)
-[nump13, denp13] = tfdata(FTplaque(1,3), 'v');
-[nump21, denp21] = tfdata(FTplaque(2,1), 'v');
-[nump22, denp22] = tfdata(FTplaque(2,2), 'v');
-[nump23, denp23] = tfdata(FTplaque(2,3), 'v');
-[nump31, denp31] = tfdata(FTplaque(3,1), 'v');
-[nump32, denp32] = tfdata(FTplaque(3,2), 'v');
-[nump33, denp33] = tfdata(FTplaque(3,3), 'v');
-
-[nums11, dens11] = tfdata(FTsphere(1,1), 'v');
-[nums12, dens12] = tfdata(FTsphere(1,2), 'v');  %Dénominateur shpere input 2 et output 1 (dens12)
-[nums13, dens13] = tfdata(FTsphere(1,3), 'v');
-[nums21, dens21] = tfdata(FTsphere(2,1), 'v');
-[nums22, dens22] = tfdata(FTsphere(2,2), 'v');
-[nums23, dens23] = tfdata(FTsphere(2,3), 'v');
-[nums31, dens31] = tfdata(FTsphere(3,1), 'v');
-[nums32, dens32] = tfdata(FTsphere(3,2), 'v');
-[nums33, dens33] = tfdata(FTsphere(3,3), 'v');
-[nums41, dens41] = tfdata(FTsphere(4,1), 'v');
-[nums42, dens42] = tfdata(FTsphere(4,2), 'v');
-[nums43, dens43] = tfdata(FTsphere(4,3), 'v');
+%Numérateur dénominateur des fonctions de transfert de la plaque
+[numPhi_Vphi, denPhi_Vphi] = tfdata(FTplaque(1,1), 'v');
+[numTheta_VTheta, denTheta_VTheta] = tfdata(FTplaque(2,2), 'v'); 
+[numZ_VZ, denZ_VZ] = tfdata(FTplaque(3,3), 'v'); 
 
 %Pôles et zéros des fonctions de transfert
-pp11 = roots(denp11)
-pp12 = roots(denp12)    %pole plaque output 1 input 2
-pp13 = roots(denp13)
-pp21 = roots(denp21)
-pp22 = roots(denp22)
-pp23 = roots(denp23)
-pp31 = roots(denp31)
-pp32 = roots(denp32)
-pp33 = roots(denp33)
+pp1 = roots(denPhi_Vphi);
+pp2 = roots(denTheta_VTheta);
+pp3 = roots(denZ_VZ);
 
-ps11 = roots(dens11)
-ps12 = roots(dens12)
-ps13 = roots(dens13)
-ps21 = roots(dens21)
-ps22 = roots(dens22)
-ps23 = roots(dens23)
-ps31 = roots(dens31)
-ps32 = roots(dens32)
-ps33 = roots(dens33)
-ps41 = roots(dens41)
-ps42 = roots(dens42)
-ps43 = roots(dens43)
+ps1 = eig(FTsphere(1,1));
+ps2 = eig(FTsphere(4,1));
+ps3 = eig(FTsphere(1,2));
+ps4 = eig(FTsphere(3,2));
 
 
 %% Lieu des racines
-%Entrée Vphi
+%Système plaque
 figure
-subplot(211)
+subplot(311)
 rlocus(FTplaque(1,1))
-title('Lieu des racines FT pour entrée Vphi et sortie dD')
-subplot(212)
-rlocus(FTplaque(3,1))
-title('Lieu des racines FT pour entrée Vphi et sortie dF')
-
-%Entrée Vtetha
-figure
-subplot(211)
-rlocus(FTplaque(1,2))
-title('Lieu des racines FT pour entrée Vtheta et sortie dD et sortie dF')
-subplot(212)
+title('Lieu des racines FT \phi/V_{\phi}')
+subplot(312)
 rlocus(FTplaque(2,2))
-title('Lieu des racines FT pour entrée Vtheta et sortie dE')
+title('Lieu des racines FT \theta/V_{\theta}')
+subplot(313)
+rlocus(FTplaque(3,3))
+title('Lieu des racines FT z/V_z')
 
-%Entrée Vz
+%Système sphère
 figure
-rlocus(FTplaque(1,3))
-title('Lieu des racines FT pour entrée Vz et sortie dD, dE et dF')
+subplot(221)
+rlocus(FTsphere(2,1))
+title('Lieu des racines FT y_s/\phi')
+subplot(222)
+rlocus(FTsphere(4,1))
+title('Lieu des racines FT \omega_{y}/\phi')
 
+subplot(223)
+rlocus(FTsphere(1,2))
+title('Lieu des racines FT x_s/\theta')
+subplot(224)
+rlocus(FTsphere(3,2))
+title('Lieu des racines FT \omega_{x}/\theta')
