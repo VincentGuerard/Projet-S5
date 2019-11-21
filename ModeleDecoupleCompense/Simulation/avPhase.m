@@ -5,7 +5,7 @@ function compensateur = avPhase(poles_desire, FTBO, ajoutPhase, compensateur_sim
 [num den] = tfdata(FTBO, 'v');
 Gspd = polyval(num, poles_desire(1))/polyval(den, poles_desire(1));
 phaseGs = -(2*pi - angle(Gspd));
-deltaPhase = -pi - phaseGs + ajoutPhase
+deltaPhase = -pi - phaseGs + ajoutPhase;
 
 if deltaPhase < (65/360)*2*pi || compensateur_simple
     alpha = pi - (pi - angle(poles_desire(1)));
@@ -29,7 +29,7 @@ else
     z = real(poles_desire(1)) - imag(poles_desire(1))/tan(phiz);
 
     % Gain Ka
-    Ka = 1/abs(((poles_desire(1)-z)^2/(poles_desire(1)-p)^2)*abs(Gspd))
+    Ka = 1/abs(((poles_desire(1)-z)^2/(poles_desire(1)-p)^2)*abs(Gspd));
     Ka = sqrt(Ka);
 
     Ga = tf(Ka*[1 -z], [1 -p]);

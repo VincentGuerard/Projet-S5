@@ -67,7 +67,8 @@ mSg   = mS*g;         % N - poids de la sphère
 
 % Plaque
 mP = 425e-03;     % kg
-Jx =  1169e-06;  % kg m^2
+% Jx =  1169e-06;  % kg m^2
+Jx =  1347e-06;  % kg m^2
 Jy =  Jx;             % kg m^2
 Jz = 2329e-06;  % kg m^2
 
