@@ -219,7 +219,7 @@ mat_Zero73 = zeros(7,3);
 
 PP = [2*YB*alphaB(0,0,Soluce_iBeqfin,0.015)/Jpx 0 0;
       0 -6*XB*betaB(0,0,Soluce_iBeqfin,0.015)/Jpy 0;
-      0 0 (3*gammaA(0,0,Soluce_iAeqfin,0.015)/(mP))];
+      0 0 (3*gammaA(0,0,Soluce_iAeqfin,0.015)/(mP+mS))];
 PS = [0 0;
       0 0;
       0 0];
