@@ -217,15 +217,15 @@ mat_Zero34 = zeros(3,4);
 mat_Zero43 = zeros(4,3);
 mat_Zero73 = zeros(7,3);
 
-PP = [2*XB*alphaB(0,0,Soluce_iBeqfin,0.015)/Jpx 0 0;
+PP = [2*YB*alphaB(0,0,Soluce_iBeqfin,0.015)/Jpx 0 0;
       0 -6*XB*betaB(0,0,Soluce_iBeqfin,0.015)/Jpy 0;
-      0 0 (gammaA(0,0,Soluce_iAeqfin,0.015)/(mP+mS))];
+      0 0 (3*gammaA(0,0,Soluce_iAeqfin,0.015)/(mP))];
 PS = [0 0;
       0 0;
       0 0];
 PC = [sigmaA(0,0,Soluce_iAeqfin, 0.015)/Jpx 0 0;
       0 sigmaA(0,0,Soluce_iAeqfin, 0.015)/Jpy 0;
-      0 0 sigmaA(0,0,Soluce_iAeqfin, 0.015)/(mP+mS)];
+      0 0 sigmaA(0,0,Soluce_iAeqfin, 0.015)/(mP)];
 SP = [0 -5/7*g 0;
       5/7*g 0 0];
 CC = [-R/L 0 0;
