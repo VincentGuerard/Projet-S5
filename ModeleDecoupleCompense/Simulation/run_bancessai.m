@@ -28,7 +28,7 @@ run('../Projet_S5_decouple.m');
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
-Calcul_Compensateurs
+Compensateur_angles_v1
 
 %simulation
 open_system('DYNctl_ver4_etud_obfusc')
