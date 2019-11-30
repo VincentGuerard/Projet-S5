@@ -35,13 +35,13 @@ pole_des_angle  = [-zeta_des_angle*wn_des_angle+wn_des_angle*sqrt(1-zeta_des_ang
 figure; hold on; plot(pole_des_angle, 'p'); rlocus(FTplaque(1,1));  %Les pôles désirés sont placés à gauche                                                                   
 title('Lieu des racines \phi / V_\phi et pôles désirés')            %des tracés dominant, donc un compensateur est necessaire
 
-Ga_angle                         = avPhase(pole_des_angle, FTplaque(1,1), (0*pi/180), 2);
+Ga_angle                         = avPhase(pole_des_angle, FTplaque(1,1), (15*pi/180), 2);
 FTplaque_angles_comp             = series(FTplaque(1,1),Ga_angle);
 [num_angle_comp, den_angle_comp] = tfdata(FTplaque_angles_comp, 'v');
 
 Ga_angles = avPhase(pole_des_angle, FTplaque(1,1), (15/360)*2*pi, 2);
 FTplaque_angles_comp = FTplaque(1,1) * 3 * Ga_angles;
-info = stepinfo(feedback(FTangle_comp,1));
+info = stepinfo(feedback(FTplaque_angles_comp,1));
 
 %Affichage de l'atteinte des pôles désirés
 figure;
