@@ -32,7 +32,7 @@ Compensateur_angles_v1
 
 %simulation
 open_system('DYNctl_ver4_etud_obfusc')
-set_param('DYNctl_ver4_etud_obfusc','AlgebraicLoopSolver','TrustRegion')
+set_param('DYNctl_ver4_etud_obfusc','AlgebraicLoopSolver','LineSearch')
 sim('DYNctl_ver4_etud_obfusc')
 
 %% affichage

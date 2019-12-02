@@ -1,8 +1,9 @@
 %% Compensateur Angles
 close all
+clc
 
 % Specifications
-Mp          = 0.05;
+Mp          = 0.05; % 5
 Ts          = 0.03;
 Tp          = 0.025;
 Tr          = 0.02;
@@ -14,8 +15,8 @@ erp_rampe   = 1;
 
 % Ajout d'un avance de phase pour réglé le régime transitoire
 FTBO    = FTplaque(1,1);
-Ga      = avPhase(p_des, FTBO, (15/360)*2*pi, 2);
-FTBF    = FTBO * Ga;
+Ga      = avPhase(p_des, FTBO, (20/360)*2*pi, 2); % 33
+FTBF    = FTBO * 1 * Ga;
 
 % Affichage de l'atteinte des pôles désirés
 figure;
@@ -63,17 +64,21 @@ u = ones(length(t),1);
 figure
 lsim(feedback(FTBF,1),u,t)
 
-% Ajustement du gain
+%Ajustement du gain
 K = 1.5;
 p = rlocus(FTBF, K);
 angles = angle(p);
 freq_n = real(p)./cos(angles);
-while freq_n(2) < 1000 && freq_n(3) < 1000 && freq_n(4) < 1000 && freq_n(5) < 1000 && freq_n(6) < 1000 && K < 10
+damping = [0 0 0 0];
+freqmax = 1000;
+while freq_n(3) < freqmax && freq_n(4) < freqmax && freq_n(5) < freqmax && freq_n(6) < freqmax  && freq_n(2) < freqmax && K < 10
     K = K + 0.001;
     p = rlocus(FTBF, K);
     angles = angle(p);
+    damping = cos(angles);
     freq_n = real(p)./cos(angles);
-end 
+end
+%K = 1
 figure
 rlocus(K * FTBF); hold on
 p = rlocus(FTBF, K);
@@ -97,8 +102,9 @@ u = ones(length(t),1);
 figure
 lsim(feedback(K*FTBF,1),u,t)
 
-FTBF = FTBF * K
+FTBF = FTBF * K;
 Comp = K * Ga * Gpi
+[numCompAngles denCompAngles] = tfdata(Comp, 'v');
 
 % Vérification des critères de sécurités
 figure 
