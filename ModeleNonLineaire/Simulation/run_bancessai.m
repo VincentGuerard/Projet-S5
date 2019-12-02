@@ -28,7 +28,12 @@ bancEssaiConstantes
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
-
+Tdef = [YD -XD 1;
+        YE -XE 1;
+        YF -XF 1];
+TABC = [YA YB YC;
+        -XA -XB -XC;
+        1 1 1];
 %simulation
 open_system('DYNctl_ver4_etud_obfusc')
 set_param('DYNctl_ver4_etud_obfusc','AlgebraicLoopSolver','LineSearch')
@@ -100,21 +105,21 @@ legend('Ax prof', 'Ay prof', 'Wx prof', 'Wy prof', 'Ax', 'Ay', 'Wx', 'Wy');grid 
 % Comparaison de la position de la bille sur la plaque Px et Py
 figure
 subplot(211); 
-plot(tsim, ynonlineaire(:,7), '--');hold on;title('Position Px Py Vx Vy des deux modèles');
-plot(tsim, ynonlineaire(:,8), '--');
-plot(tsim, ynonlineaire(:,9), '--');
-plot(tsim, ynonlineaire(:,10), '--');
-plot(tsim, ySystemeNonLineaire(:,2));
-plot(tsim, ySystemeNonLineaire(:,1));
-plot(tsim, ySystemeNonLineaire(:,4));
-plot(tsim, ySystemeNonLineaire(:,3));
+plot(tsim, ynonlineaire(:,7), 'b--', 'Linewidth', 2);hold on;title('Position Px Py Vx Vy des deux modèles');
+plot(tsim, ynonlineaire(:,8), 'r--', 'Linewidth', 2);
+plot(tsim, ynonlineaire(:,9), 'g--', 'Linewidth', 2);
+plot(tsim, ynonlineaire(:,10), 'y--', 'Linewidth', 2);
+plot(tsim, ySystemeNonLineaire(:,2),'b');
+plot(tsim, ySystemeNonLineaire(:,1),'r');
+plot(tsim, ySystemeNonLineaire(:,4), 'g');
+plot(tsim, ySystemeNonLineaire(:,3), 'y');
 legend('Px prof', 'Py prof', 'Vx prof', 'Vy prof', 'Px', 'Py', 'Vx', 'Vy');grid on; grid minor;
 ylim([-0.06 0.06]);
 subplot(212); 
-plot(tsim, ySystemeNonLineaire(:,2) - ynonlineaire(:,7)); hold on;title('Différence de la position Px Py et la vitesse Vx Vy');
-plot(tsim, ySystemeNonLineaire(:,1) - ynonlineaire(:,8));
-plot(tsim, ySystemeNonLineaire(:,4) - ynonlineaire(:,9));
-plot(tsim, ySystemeNonLineaire(:,3) - ynonlineaire(:,10));
+plot(tsim, ySystemeNonLineaire(:,2) - ynonlineaire(:,7), 'b', 'Linewidth', 2); hold on;title('Différence de la position Px Py et la vitesse Vx Vy');
+plot(tsim, ySystemeNonLineaire(:,1) - ynonlineaire(:,8), 'r', 'Linewidth', 2);
+plot(tsim, ySystemeNonLineaire(:,4) - ynonlineaire(:,9), 'g', 'Linewidth', 2);
+plot(tsim, ySystemeNonLineaire(:,3) - ynonlineaire(:,10), 'y', 'Linewidth', 2);
 legend('Diff Px', 'Diff Py', 'Diff Vx', 'Diff Vy');grid on; grid minor;
 ylim([-0.06 0.06])
 
