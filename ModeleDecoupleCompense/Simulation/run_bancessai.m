@@ -28,7 +28,7 @@ run('../Projet_S5_decouple.m');
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
-Calcul_Compensateurs
+Compensateur_angles_v1
 
 %simulation
 open_system('DYNctl_ver4_etud_obfusc')
@@ -40,21 +40,21 @@ sim('DYNctl_ver4_etud_obfusc')
 % Comparaison de la position de la bille sur la plaque Px et Py
 figure
 subplot(211); 
-plot(tsim, ynonlineaire(:,7), '--');hold on;title('Position Px Py Vx Vy nonlinéaire (pointillé) vs Linéaire (ligne pleine)');
-plot(tsim, ynonlineaire(:,8), '--');
-plot(tsim, ynonlineaire(:,9), '--');
-plot(tsim, ynonlineaire(:,10), '--');
-plot(tsim, ySphereDecouple.Data(:,1));
-plot(tsim, ySphereDecouple.Data(:,2));
-plot(tsim, ySphereDecouple.Data(:,3));
-plot(tsim, ySphereDecouple.Data(:,4));
+plot(tsim, ynonlineaire(:,7), 'b--', 'Linewidth', 2);hold on;title('Position Px Py Vx Vy nonlinéaire (pointillé) vs Linéaire (ligne pleine)');
+plot(tsim, ynonlineaire(:,8), 'r--', 'Linewidth', 2);
+plot(tsim, ynonlineaire(:,9), 'g--', 'Linewidth', 2);
+plot(tsim, ynonlineaire(:,10), 'y--', 'Linewidth', 2);
+plot(tsim, ySphereDecouple.Data(:,1), 'b');
+plot(tsim, ySphereDecouple.Data(:,2), 'r');
+plot(tsim, ySphereDecouple.Data(:,3), 'g');
+plot(tsim, ySphereDecouple.Data(:,4), 'y');
 legend('Px prof', 'Py prof', 'Vx prof', 'Vy prof', 'Px', 'Py', 'Vx', 'Vy');grid on; grid minor;
 ylim([-0.06 0.06]);
 subplot(212);
-plot(tsim, ySphereDecouple.Data(:,1) - ynonlineaire(:,7)); hold on;title('Différence de la position Px Py et la vitesse Vx Vy');
-plot(tsim, ySphereDecouple.Data(:,2) - ynonlineaire(:,8));
-plot(tsim, ySphereDecouple.Data(:,3) - ynonlineaire(:,9));
-plot(tsim, ySphereDecouple.Data(:,4) - ynonlineaire(:,10));
+plot(tsim, ySphereDecouple.Data(:,1) - ynonlineaire(:,7), 'b', 'Linewidth', 2); hold on;title('Différence de la position Px Py et la vitesse Vx Vy');
+plot(tsim, ySphereDecouple.Data(:,2) - ynonlineaire(:,8), 'r', 'Linewidth', 2);
+plot(tsim, ySphereDecouple.Data(:,3) - ynonlineaire(:,9), 'g', 'Linewidth', 2);
+plot(tsim, ySphereDecouple.Data(:,4) - ynonlineaire(:,10), 'y', 'Linewidth', 2);
 legend('Diff Px', 'Diff Py', 'Diff Vx', 'Diff Vy');grid on; grid minor;
 
 % Comparaison des distances

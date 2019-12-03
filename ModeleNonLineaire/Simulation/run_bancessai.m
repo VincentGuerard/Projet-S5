@@ -21,10 +21,9 @@ z_des     = [t_des, [1 1 1 1  1  1 1 1 1]'*.015];
 tfin = 50;
 
 %initialisation
-bancEssaiConstantes
 %bancessai_ini  %faites tous vos calculs de modele ici
-run('../../Identification/IdentificationActionneur.m');close all;
-%run('../../Identification/Projet_s5.m');close all;
+%run('../../Identification/IdentificationActionneur.m');close all;
+run('../../Identification/Projet_s5.m');close all;
 bancEssaiConstantes
 
 %Calcul des compensateurs
@@ -40,9 +39,9 @@ sim('DYNctl_ver4_etud_obfusc')
 % Comparaison des tension Va, Vb, Vc
 figure
 subplot(211); 
-plot(tsim, ynonlineaire(:,23));hold on;title('Tension Va Vb Vc des deux modèles');
-plot(tsim, ynonlineaire(:,24));
-plot(tsim, ynonlineaire(:,25));
+plot(tsim, ynonlineaire(:,23), '--');hold on;title('Tension Va Vb Vc des deux modèles');
+plot(tsim, ynonlineaire(:,24), '--');
+plot(tsim, ynonlineaire(:,25), '--');
 plot(tsim, ySystemeNonLineaire(:,17));
 plot(tsim, ySystemeNonLineaire(:,18));
 plot(tsim, ySystemeNonLineaire(:,19));
@@ -56,9 +55,9 @@ legend('Diff Va', 'Diff Vb', 'Diff Vc');grid on; grid minor;
 % Comparaison des courants Ia, Ib, Ic
 figure
 subplot(211); 
-plot(tsim, ynonlineaire(:,11));hold on;title('Courant Ia Ib Ic des deux modèles');
-plot(tsim, ynonlineaire(:,12));
-plot(tsim, ynonlineaire(:,13));
+plot(tsim, ynonlineaire(:,11), '--');hold on;title('Courant Ia Ib Ic des deux modèles');
+plot(tsim, ynonlineaire(:,12), '--');
+plot(tsim, ynonlineaire(:,13), '--');
 plot(tsim, ySystemeNonLineaire(:,5));
 plot(tsim, ySystemeNonLineaire(:,6));
 plot(tsim, ySystemeNonLineaire(:,7));
@@ -72,9 +71,9 @@ legend('Diff Ia', 'Diff Ib', 'Diff Ic');grid on; grid minor;
 % Comparaison des Forces Fa, Fb, Fc
 figure
 subplot(211); 
-plot(tsim, ynonlineaire(:,20));hold on;title('Forces Fa Fb Fc des deux modèles');
-plot(tsim, ynonlineaire(:,21));
-plot(tsim, ynonlineaire(:,22));
+plot(tsim, ynonlineaire(:,20), '--');hold on;title('Forces Fa Fb Fc des deux modèles');
+plot(tsim, ynonlineaire(:,21), '--');
+plot(tsim, ynonlineaire(:,22), '--');
 plot(tsim, ySystemeNonLineaire(:,14));
 plot(tsim, ySystemeNonLineaire(:,15));
 plot(tsim, ySystemeNonLineaire(:,16));
@@ -101,10 +100,10 @@ legend('Ax prof', 'Ay prof', 'Wx prof', 'Wy prof', 'Ax', 'Ay', 'Wx', 'Wy');grid 
 % Comparaison de la position de la bille sur la plaque Px et Py
 figure
 subplot(211); 
-plot(tsim, ynonlineaire(:,7));hold on;title('Position Px Py Vx Vy des deux modèles');
-plot(tsim, ynonlineaire(:,8));
-plot(tsim, ynonlineaire(:,9));
-plot(tsim, ynonlineaire(:,10));
+plot(tsim, ynonlineaire(:,7), '--');hold on;title('Position Px Py Vx Vy des deux modèles');
+plot(tsim, ynonlineaire(:,8), '--');
+plot(tsim, ynonlineaire(:,9), '--');
+plot(tsim, ynonlineaire(:,10), '--');
 plot(tsim, ySystemeNonLineaire(:,2));
 plot(tsim, ySystemeNonLineaire(:,1));
 plot(tsim, ySystemeNonLineaire(:,4));
