@@ -28,12 +28,7 @@ bancEssaiConstantes
 
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
-Tdef = [YD -XD 1;
-        YE -XE 1;
-        YF -XF 1];
-TABC = [YA YB YC;
-        -XA -XB -XC;
-        1 1 1];
+
 %simulation
 open_system('DYNctl_ver4_etud_obfusc')
 set_param('DYNctl_ver4_etud_obfusc','AlgebraicLoopSolver','LineSearch')
