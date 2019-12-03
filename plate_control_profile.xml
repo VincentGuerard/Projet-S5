@@ -7,7 +7,7 @@
     </config>
     <params datetime="2014-08-22T09:00:00.000000" nsamples="8" params_control_loop1_type="z_transfer_function">
       <!-- Ordre de B0... A1... (B0 est numC)rateur z0 ) -->
-      <params_control_loop1 index="0" eq_point=1>
+      <params_control_loop1 index="0" eq_point=-1.8227267852977847026906637346951>
         <params_control_loop_coeff index="0" value ="9262.4706403487925854"/>
         <params_control_loop_coeff index="1" value ="-25696.402886116487934"/>
         <params_control_loop_coeff index="2" value ="23749.363653911790607"/>
@@ -16,7 +16,7 @@
         <params_control_loop_coeff index="5" value ="-0.85698357014529780162"/>
         <params_control_loop_coeff index="6" value ="-0.38666616746373938529"/>
       </params_control_loop1>
-      <params_control_loop1 index="1" eq_point=1>
+      <params_control_loop1 index="1" eq_point=-1.8227267852977847026906637346951>
         <params_control_loop_coeff index="0" value ="9262.4706403487925854"/>
         <params_control_loop_coeff index="1" value ="-25696.402886116487934"/>
         <params_control_loop_coeff index="2" value ="23749.363653911790607"/>
@@ -25,7 +25,7 @@
         <params_control_loop_coeff index="5" value ="-0.85698357014529780162"/>
         <params_control_loop_coeff index="6" value ="-0.38666616746373938529"/>
       </params_control_loop1>
-      <params_control_loop1 index="2" eq_point=1>
+      <params_control_loop1 index="2" eq_point=-1.8227267852977847026906637346951>
         <params_control_loop_coeff index="0" value ="1079150.2770256386138"/>
         <params_control_loop_coeff index="1" value ="-2951871.982706297189"/>
         <params_control_loop_coeff index="2" value ="2685194.7090426641516"/>
