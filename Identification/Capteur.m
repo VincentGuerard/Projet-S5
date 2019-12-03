@@ -159,9 +159,9 @@ Phi6Y = sum(phi6.*distance);
 
 YY= [Phi1Y;Phi2Y;Phi3Y;Phi4Y;;Phi5Y;Phi6Y];
 
-XX=inv(A)*YY;
+XXchoisi=inv(A)*YY;
 
-yfin = XX(1)*phi1 + XX(2)*phi2 + XX(3)*phi3 + XX(4)*phi4 + XX(5)*phi5 + XX(6)*phi6;
+yfin = XXchoisi(1)*phi1 + XXchoisi(2)*phi2 + XXchoisi(3)*phi3 + XXchoisi(4)*phi4 + XXchoisi(5)*phi5 + XXchoisi(6)*phi6;
 
 figure
 plot(voltage,distance, '.', 'MarkerSize', 8)
@@ -213,3 +213,9 @@ xlabel('Tension (V)');
 ylabel('Distance (m)');
 legend('Mesures', 'Fonction approximée');
 grid on; grid minor;
+
+%% Equation et coefficient de l'approximation
+syms x a1 a2 a3 a4 a5 a6 a7
+equation = a1*exp(x) + a2*log(2*x) + a3*exp(4*x) + a4*log(6*x) + a5*exp(5*x) + a6*log(x)
+disp('Coefficients: ');
+XXchoisi
