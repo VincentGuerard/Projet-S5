@@ -29,6 +29,7 @@ run('../Projet_S5_decouple.m');
 %Calcul des compensateurs
 %iniCTL_ver4    %Calculez vos compensateurs ici
 Compensateur_angles_v1
+Compensateur_hauteur
 
 %simulation
 open_system('DYNctl_ver4_etud_obfusc')
@@ -64,15 +65,15 @@ hold on;title('Distance zD zE zF des deux modèles');
 plot(tsim, ynonlineaire(:,17), 'b--', 'Linewidth', 2);
 plot(tsim, ynonlineaire(:,18), 'r--', 'Linewidth', 2);
 plot(tsim, ynonlineaire(:,19), 'g--', 'Linewidth', 2);
-plot(tsim, yPlaqueDecouple.Data(:,1), 'b');
-plot(tsim, yPlaqueDecouple.Data(:,2), 'r');
-plot(tsim, yPlaqueDecouple.Data(:,3), 'g');
+plot(tsim, Distance.Data(:,1), 'b');
+plot(tsim, Distance.Data(:,2), 'r');
+plot(tsim, Distance.Data(:,3), 'g');
 legend('zD prof', 'zE prof', 'zF prof', 'zD', 'zE', 'zF');grid on; grid minor;
 subplot(212); 
 hold on;title('Différence des distances zD zE zF');
-plot(tsim, yPlaqueDecouple.Data(:,1) - ynonlineaire(:,17), 'Linewidth', 2);
-plot(tsim, yPlaqueDecouple.Data(:,2) - ynonlineaire(:,18), 'Linewidth', 2);
-plot(tsim, yPlaqueDecouple.Data(:,3) - ynonlineaire(:,19), 'Linewidth', 2);
+plot(tsim, Distance.Data(:,1) - ynonlineaire(:,17), 'Linewidth', 2);
+plot(tsim, Distance.Data(:,2) - ynonlineaire(:,18), 'Linewidth', 2);
+plot(tsim, Distance.Data(:,3) - ynonlineaire(:,19), 'Linewidth', 2);
 legend('Diff zD', 'Diff zE', 'Diff zF');grid on; grid minor;
 
 % Comparaison des tenison
