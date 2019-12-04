@@ -1,5 +1,7 @@
 % Trajectoire
-function [Pi, Ltr, E, Vr, Traj, tt] = trajectoire(position, vAB, Ts)
+
+
+function [Pi, Ltr, E, Vr, Traj, tt] = Trajectoire_func(position, vAB, Ts)
 
 xn = position(:,1);
 yn = position(:,2);
@@ -10,7 +12,6 @@ yn = position(:,2);
 for i = 1:length(xn)    
     P(:,i) =  xn.^(i-1);
 end
-
 A = pinv(P)*yn;
 
 for j = 1:length(xn)
@@ -34,8 +35,8 @@ end
 %% -------------------- Longueur de la Trajectoire ------------------------
 M = 101;
 xrow = sortrows(xn);
-xm = xrow(1): xrow(end)/M : xrow(end);
-h = xrow(end)/M;
+h = (xrow(end)-xrow(1))/(M-1);
+xm = xrow(1): h : xrow(end);
 
 y = polyval(Pi,xm);           % ----> f
 yp = polyval(Pi_der,xm);      % ----> f'
@@ -60,12 +61,16 @@ E = (h^2/12)*(gpb-gpa);
 
 %% ---------------------- Échantilonnage des points -----------------------
 
-% Calcul du nombre de points O et de la vitesse réelle
+% Calcul du nombre de points O
 dt = vAB * Ts;
 O = round(Ltr(end,2)/dt);
-% O = 10;
+
+% Calcul de la vitesse réelle
 dt = Ltr(end,2)/O;
 Vr = dt/Ts;
+
+% Calcul du temps total
+tt = Ltr(end,2)/Vr;
 
 % Précision du Newton-Raphson
 tol = 1e-08;
@@ -74,23 +79,22 @@ iteMax = 101;
 % Conditions initiales
 Traj = zeros(O,2);
 D = Longueur(end)/(O-1);
-a0 = 0;
+a0 = min(xn);
 a = a0;
 
-for i= 1 : O
-    b = a + 0.001;
-    y = polyval(Pi,a);
-    yp = polyval(Pi_der,a);
-    g = sqrt(1+yp.^2);
-    h = 0.1;
-    fn = 0 - D;
-    fpn = g;
+% Calcul de la prochaine borne d'intégration
+
+    b = a + 0.001;               % ----> borne b légèrement supérieure
+for i= 1 : O  
+    yp = polyval(Pi_der,a);       % ----> f'
+    g = sqrt(1+yp.^2);            % ----> g
+    fn = -D;                      % ----> g(0) - D
+    fpn = g;                      % ----> dL/db = g(b)
     ite = 0;
     while abs(fn) > tol && ite < iteMax
         b = b - fn/fpn;
         h = (b-a)/(M-1);
         x = a:h:b;
-        y = polyval(Pi,x);
         yp = polyval(Pi_der,x);
         g = sqrt(1+yp.^2);
         fn = (h/2)*(g(1) + g(end) + 2*sum(g(2:end-1)))- D;
@@ -99,11 +103,7 @@ for i= 1 : O
     end    
     Traj(i,1) = b;
     Traj(i,2) = polyval(Pi,b);
-    
     a = b;
 end
-
-% Calcul du temps total
-tt = Ltr(end,2)/Vr;
 
 end

@@ -29,19 +29,17 @@ Pzeq = .015;            %en metres
 % z_des     = [t_des, [1 1 1]'*.015];
 % tfin = 15;
 
-%Trejectoir référence
-positionAB = [0 0.2 0.4 0.6 0.8 1;
-              0 .3 .5 0.3 0.4 1]'*0.05;    
-v = 0.01;
-Ts = 0.2;
-[Pi, Ltr, E, Vr, Traj, tt] = Trajectoire_func(positionAB,v,Ts);
+%Trejectoire référence
+load('trajectoire.mat')
+
+[Pi, Ltr, E, Vr, Traj, tt] = Trajectoire_func(NAB,vAB,Ts);
 x = Traj(:,1);
 y = Traj(:,2);
 t_des = [0:1:length(x)-1]'.*Ts;
 x_des = [t_des, x];
 y_des = [t_des, y];
 z_des  = [t_des, ones(length(x),1)*.015];
-tfin = tt+0.5+0.2;
+tfin = tt;
 
 % %Test hauteur
 % t_des     = [0:1:2]'*5;
@@ -87,14 +85,15 @@ sim('DYNctl_ver4_etud_obfusc')
 
 %Figure test trajectoire référence
 figure;subplot(211);hold on
-plot(ySystemeNonLineaire(:,2), ySystemeNonLineaire(:,1),'b');
-plot(positionAB(:,1), positionAB(:,2), 'o')
+plot(ySystemeNonLineaire(:,2), ySystemeNonLineaire(:,1),'bx');
+plot(NAB(:,1), NAB(:,2), 'o')
 legend('Px', 'Py')
 hold off;
 subplot(212); plot(tsim, ySystemeNonLineaire(:,4), 'b'); plot(tsim, ySystemeNonLineaire(:,3), 'r');
 legend('v_x', 'v_y')
-errx = positionAB(end,1)-ySystemeNonLineaire(end,2)
-erry = positionAB(end,2)-ySystemeNonLineaire(end,1)
+
+errx = NAB(end,1)-ySystemeNonLineaire(end,2);
+erry = NAB(end,2)-ySystemeNonLineaire(end,1);
 
 % %Figure test simple
 % figure; hold on; plot((0:1:14), [0 0 0 0 0 1 1 1 1 1 0 0 0 0 0]*0.05, 'b', 'Linewidth', 2); plot((0:1:14), [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1]*0.05, 'r', 'Linewidth', 2);
