@@ -81,6 +81,9 @@ open_system('DYNctl_ver4_etud_obfusc')
 set_param('DYNctl_ver4_etud_obfusc','AlgebraicLoopSolver','TrustRegion')
 sim('DYNctl_ver4_etud_obfusc')
 
+% Verification des violations
+DetectionViolations
+
 %% affichage
 
 %Figure test trajectoire référence
