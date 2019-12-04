@@ -22,24 +22,24 @@ Pzeq = .015;            %en metres
 % z_des     = [t_des, [1 1 1 1  1  1 1 1 1 1 1]'*.015];
 % tfin = 50;
 
-% %Test trajectoire simple
-% t_des     = [0:1:2]'*5;
-% x_des     = [t_des, [0 0 0]'*0.05];
-% y_des     = [t_des, [0 1 1]'*0.05];
-% z_des     = [t_des, [1 1 1]'*.015];
-% tfin = 15;
+%Test trajectoire simple
+t_des     = [0:1:2]'*5;
+x_des     = [t_des, [0 0 0]'*0.05];
+y_des     = [t_des, [0 1 1]'*0.05];
+z_des     = [t_des, [1 1 1]'*.015];
+tfin = 15;
 
 %Trejectoire référence
-load('trajectoire.mat')
+% load('trajectoire.mat')
 
-[Pi, Ltr, E, Vr, Traj, tt] = Trajectoire_func(NAB,vAB,Ts);
-x = Traj(:,1);
-y = Traj(:,2);
-t_des = [0:1:length(x)-1]'.*Ts;
-x_des = [t_des, x];
-y_des = [t_des, y];
-z_des  = [t_des, ones(length(x),1)*.015];
-tfin = tt;
+% [Pi, Ltr, E, Vr, Traj, tt] = Trajectoire_func(NAB,vAB,Ts);
+% x = Traj(:,1);
+% y = Traj(:,2);
+% t_des = [0:1:length(x)-1]'.*Ts;
+% x_des = [t_des, x];
+% y_des = [t_des, y];
+% z_des  = [t_des, ones(length(x),1)*.015];
+% tfin = tt;
 
 % %Test hauteur
 % t_des     = [0:1:2]'*5;
@@ -86,23 +86,23 @@ DetectionViolations
 
 %% affichage
 
-%Figure test trajectoire référence
-figure;subplot(211);hold on
-plot(ySystemeNonLineaire(:,2), ySystemeNonLineaire(:,1),'bx');
-plot(NAB(:,1), NAB(:,2), 'o')
-legend('Px', 'Py')
-hold off;
-subplot(212); plot(tsim, ySystemeNonLineaire(:,4), 'b'); plot(tsim, ySystemeNonLineaire(:,3), 'r');
-legend('v_x', 'v_y')
+% %Figure test trajectoire référence
+% figure;subplot(211);hold on
+% plot(ySystemeNonLineaire(:,2), ySystemeNonLineaire(:,1),'bx');
+% plot(NAB(:,1), NAB(:,2), 'o')
+% legend('Px', 'Py')
+% hold off;
+% subplot(212); plot(tsim, ySystemeNonLineaire(:,4), 'b'); plot(tsim, ySystemeNonLineaire(:,3), 'r');
+% legend('v_x', 'v_y')
 
-errx = NAB(end,1)-ySystemeNonLineaire(end,2);
-erry = NAB(end,2)-ySystemeNonLineaire(end,1);
+% errx = NAB(end,1)-ySystemeNonLineaire(end,2);
+% erry = NAB(end,2)-ySystemeNonLineaire(end,1);
 
-% %Figure test simple
-% figure; hold on; plot((0:1:14), [0 0 0 0 0 1 1 1 1 1 0 0 0 0 0]*0.05, 'b', 'Linewidth', 2); plot((0:1:14), [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1]*0.05, 'r', 'Linewidth', 2);
-% plot(tsim, ySystemeNonLineaire(:,1),'b'); plot(tsim, ySystemeNonLineaire(:,2),'r');
-% legend('xdes', 'ydes', 'Px', 'Py')
-% hold off
+%Figure test simple
+figure; hold on; plot((0:1:14), [0 0 0 0 0 1 1 1 1 1 0 0 0 0 0]*0.05, 'b', 'Linewidth', 2); plot((0:1:14), [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1]*0.05, 'r', 'Linewidth', 2);
+plot(tsim, ySystemeNonLineaire(:,1),'b'); plot(tsim, ySystemeNonLineaire(:,2),'r');
+legend('xdes', 'ydes', 'Px', 'Py')
+hold off
 
 %
 figure; hold on; plot(tsim, Ax_des1, 'b', 'Linewidth', 2); plot(tsim, Ay_des1, 'r', 'Linewidth', 2);
